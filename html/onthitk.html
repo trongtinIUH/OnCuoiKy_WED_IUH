@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script src="../js/jquery-3.6.4.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script>
+        function kiemtrama(){
+            let ma= document.getElementById('txtMa').value;
+            let patten = /^[A-Z]{3}\-[A-Z]{3}-\d{4}$/;
+            if(patten.test(ma)){
+                document.getElementById('erMa').innerHTML= "oke";
+                return true;
+            }else{
+                document.getElementById('erMa').innerHTML= "không hợp lệ:  AAA-AAA-1234";
+                return false;
+            }
+        }
+        function kiemtraHT(){
+            let ht= document.getElementById('txtHT').value;
+            if (ht=="") {
+                document.getElementById('erHT').innerHTML= "bắt buộc phải nhập";
+            return false;
+        }else{
+            document.getElementById('erHT').innerHTML= "oke";
+            return true;
+        }
+        }
+
+        function kiemtraGia(){
+            let gia= document.getElementById('txtGia').value;
+            if (gia=="") {
+                document.getElementById('erGia').innerHTML= "bắt buộc phải nhập";
+            return false;
+        }else{
+            document.getElementById('erGia').innerHTML= "oke";
+            return true;
+        }
+        }
+        var txNgay=$('txtNgay');
+        var tbNgay=$('erNgay');
+        function kiemtrangay(){
+            let ngay= document.getElementById('txtNgay').value;
+            if (ngay=="") {
+                document.getElementById('erNgay').innerHTML= "bắt buộc phải nhập";
+            return false;
+        }else{
+            var day = new Date(txNgay.val());
+            var today= new Date();
+            today.setDate(today.getDate()+10);
+            if(day<today){
+                tbNgay.html("* Ngày khởi hành phải sau ngày hiện tại 10 ngày");
+            return false;
+            }
+            tbNgay.html("*");
+         return true;
+        }
+       
+        }
+        stt=1
+        function ketqua(){
+            if(kiemtrama()&&kiemtrangay()){
+                let ma= document.getElementById('txtMa').value;
+                let ht= document.getElementById('txtHT').value;
+                let ngaykh = document.getElementById('txtNgay').value;
+                let tg= document.getElementById('txtTime').value;
+                let gia= document.getElementById('txtGia').value;
+
+                let row_moi= "<tr><td>" +stt+ "</td><td>" +ma+ "</td><td>" +ht+ "</td><td>" +ngaykh+ "</td><td>" +tg+ "</td><td>" +gia+ "</td></tr>"
+                document.getElementById('tbl').innerHTML+=row_moi;
+                stt++;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-12">
+            <header>
+                <img src="../img/banner.png" alt="">
+            </header>
+        </div>
+        <div class="col-md-12">
+            <button data-toggle="modal"  data-target="#frmdk">Đăng ký tour</button>
+            <button >Đăng nhập</button>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-bordered m-3" id="tbl">
+                <tr>
+                    <th>STT</th>
+                    <th>Mã tour</th>
+                    <th>hành trình</th>
+                    <th>ngày khởi hành</th>
+                    <th>thời gian</th>
+                    <th>giá tour</th>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-12">
+            <footer><h1 class="text-center" style="color: red;">21054421 tran trong tin</h1></footer>
+        </div>
+    </div>
+
+    <!--phần chức năng modal-->
+    <div class="modal" id="frmdk">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="text-center">đăng ký tour</h1>
+                    <button data-dismiss="modal" class="close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="row form-group">
+                            <label for="" class="col-3 text-right">Mã Tour</label>
+                            <div class="col-9">
+                                <input type="text" class="form-control" id="txtMa" onblur="kiemtrama()">
+                                <span id="erMa">*</span>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <label for="" class="col-3 text-right">Hành Trình</label>
+                            <div class="col-9">
+                                <input type="text" class="form-control" id="txtHT" onblur="kiemtraHT()">
+                                <span id="erHT">*</span>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <label for="" class="col-3 text-right">Ngày khởi hành</label>
+                            <div class="col-9">
+                                <input type="date" class="form-control" id="txtNgay" onblur="kiemtrangay();">
+                                <span id="erNgay">*</span>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <label for="" class="col-3 text-right">Thời gian</label>
+                            <div class="col-9">
+                                <input type="text" class="form-control" id="txtTime" placeholder="số > 0" >
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <label for="" class="col-3 text-right">Giá Tour</label>
+                            <div class="col-9">
+                                <input type="text" class="form-control" id="txtGia" onblur="kiemtraGia()" placeholder="giá tour > 0">
+                                <span id="erGia">*</span>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-12 text-center">
+                                <input type="button" class="btn btn-primary" value="Lưu" onclick="ketqua()">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-danger">Hủy</button>
+                </div>
+                <div class="modal-footer">
+                    21054421_trần trọng tín
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

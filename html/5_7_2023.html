@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script src="../js/jquery-3.6.4.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <style></style>
+    <script>
+        function kiemtrama(){
+            let ma=document.getElementById("txtma").value;
+            let patten=/^[A-Z]{3}-[A-Z]{3}-\d{2}-\d{4}$/;
+            if(patten.test(ma)){
+                document.getElementById("errma").innerHTML = "hợp lệ";
+                return true;
+            }else{
+                document.getElementById("errma").innerHTML = "sai! vd:AAA-AAA-02-2023";
+                return false;
+            }
+        }
+        function kiemtra_hanhtrinh(){
+            let ma=document.getElementById("txthanhtrinh").value;
+            if(ma!=""){
+                document.getElementById("erhanhtrinh").innerHTML = "hợp lệ";
+                return true;
+            }else{
+                document.getElementById("erhanhtrinh").innerHTML = "không bỏ trống !";
+                return false;
+            }
+        }
+        function kiemtra_thoigian(){
+            let ma=document.getElementById("txttg").value;
+            if(ma!=""){
+                document.getElementById("errtg").innerHTML = "hợp lệ";
+                return true;
+            }else{
+                document.getElementById("errtg").innerHTML = "không bỏ trống !";
+                return false;
+            }
+        }
+        function kiemtra_hinh(){
+            let ma=document.getElementById("txtanh").value;
+            let patten = /\.(jpe?g|gif|png)$/i;
+            if(patten.test(ma)){
+                document.getElementById("erranh").innerHTML = "hợp lệ";
+                return true;
+            }else{
+                document.getElementById("erranh").innerHTML = "không hợp lệ !";
+                return false;
+            }
+        }
+        function kiemtra_giatour(){
+            let ma=document.getElementById("txtgia").value;
+            let patten = /^\d{1,}$/;
+            if(patten.test(ma)){
+                let gia= parseInt(ma);
+                if(gia>0){
+                 document.getElementById("errgia").innerHTML = "hợp lệ";
+                return true;   
+                }else{
+                    document.getElementById("errgia").innerHTML = "giá tiền >0 ";
+                return false; 
+                }
+                
+            }else{
+                document.getElementById("errgia").innerHTML = "phải nhập số !";
+                return false;
+            }
+        }
+        function kiemtra_ngay(){
+            let ma=document.getElementById("txtngay").value;
+            if(ma!=""){
+                var day= new Date(ma.value);
+                var today = new Date();
+                today.setDate(today.getDate()+30);
+                if(day<today){
+                    document.getElementById("errngay").innerHTML = " ngày tham gia phải sau 30 ngày";
+                return false;
+                }
+                else{
+                    document.getElementById("errngay").innerHTML = "Hợp lệ";
+                return true; 
+                }
+                
+            }else{
+                document.getElementById("errngay").innerHTML = "không bỏ trống !";
+                return false;
+            }
+        }
+stt=1;
+        function ketqua(){
+            if(kiemtrama()&&kiemtra_thoigian()&&kiemtra_ngay()&&kiemtra_hinh()&&kiemtra_hanhtrinh()&&kiemtra_giatour()){
+                let ngay=document.getElementById("txtngay").value;
+                let tg=document.getElementById("txttg").value;
+                let gia=document.getElementById("txtgia").value;
+                let anh=document.getElementById("txtanh").value;
+                let ht=document.getElementById("txthanhtrinh").value;
+                let ma=document.getElementById("txtma").value;
+
+                let row_moi="<tr><td>"+stt+"</td><td>"+ma+"</td><td>"+ht+"</td><td>"+ngay+"</td><td>"+tg+"</td><td>"+gia+"</td><td>"+anh+"</td></tr>";
+                document.getElementById("tbl").innerHTML+=row_moi;
+                stt++;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container" >
+       <div class="col-md-12">
+        <header style="border: 1px solid black;">
+            <img src="../img/banner.png"  alt="">
+        </header>
+       </div>
+       <div class="col-md-12">
+        <nav class="nav navbar-collapse" style="border: 1px solid black;">
+            <ul class="navbar-nav nav" >
+               <div style="display: flex; margin-top: 10px;">
+                <li ><a href=""">Đăng nhập</a></li>
+                <li class="ml-5"><a href="" data-toggle="modal" data-target="#mybtn">Mở Tour mới</a></li></div>
+            </ul>
+        </nav>
+       </div>
+       <div class="col-md-12">
+        <h3 style="margin-top: 10px; text-align: center; font-size: 20px; color: red;">DANH SÁCH TOUR DU LỊCH VIỆT NAM</h3>
+        <table class="table table-bordered mt-3" id="tbl">
+            <tr>
+                <th>STT</th>
+                <th>mã tour</th>
+                <th>hành trình</th>
+                <th>ngày khởi hành</th>
+                <th>thời gian</th>
+                <th>giá tour</th>
+                <th>ảnh đại diện</th>
+            </tr>
+        </table>
+       </div>
+       <div class="col-md-12">
+        <footer class="text-center mt-5">
+           <h4 style="color: red; font-size: 20px;">Footer--thi ck: 21054421_ Trần Trọng Tín</h4>
+        </footer>
+       </div>
+    </div>
+    <div class="modal" id="mybtn">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 600px;">
+                <div class="modal-header">
+                    <h4 class="text-center" style="width: 600px;" >THÔNG TIN TOUR</h4>
+                    <button data-dismiss="modal" class="close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!--mã tour-->
+                    <div class="row form-group">
+                        <label for="" class="col-3"> mã tour</label>
+                        <div class="col-9">
+                            <input type="text" class="form-control" id="txtma" placeholder="AAA-AAA-tháng-năm" onblur="kiemtrama()">
+                            <span id="errma" class="text-danger">*</span>
+                        </div>
+                    </div>
+                    <!--hành trình-->
+                    <div class="row form-group">
+                        <label for="" class="col-3"> hành trình</label>
+                        <div class="col-9">
+                            <input type="text" class="form-control" id="txthanhtrinh" placeholder="nhật bản" onblur="kiemtra_hanhtrinh()">
+                            <span id="erhanhtrinh" class="text-danger">*</span>
+                        </div>
+                    </div>
+                    <!--ngày-->
+                    <div class="row form-group">
+                        <label for="" class="col-3"> ngày khởi hành</label>
+                        <div class="col-9">
+                            <input type="date" class="form-control" id="txtngay" placeholder="06/06/2023" onblur="kiemtra_ngay()">
+                            <span id="errngay" class="text-danger">*</span>
+                        </div>
+                    </div>
+                    <!--thời gian-->
+                    <div class="row form-group">
+                        <label for="" class="col-3">thời gian</label>
+                        <div class="col-9">
+                            <input type="text" class="form-control" id="txttg" placeholder="1 ngày" onblur="kiemtra_thoigian()">
+                            <span id="errtg" class="text-danger">*</span>
+                        </div>
+                    </div>
+                    <!--giá tour-->
+                    <div class="row form-group">
+                        <label for="" class="col-3"> giá tour</label>
+                        <div class="col-9">
+                            <input type="text" class="form-control" id="txtgia" placeholder="1 jack" onblur="kiemtra_giatour()">
+                            <span id="errgia" class="text-danger">*</span>
+                        </div>
+                    </div>
+                    <!--ảnh địa diện-->
+                    <div class="row form-group">
+                        <label for="" class="col-3"> ảnh địa diện</label>
+                        <div class="col-9">
+                            <input type="file" class="form-control" id="txtanh" accept=".jpg, .jpeg, .jpn" placeholder="xnxx.jpg" onblur="kiemtra_hinh()">
+                            <span id="erranh" class="text-danger">*</span>
+                        </div>
+                    </div>
+                    <!--nút chọn-->
+                    <div class="form-group">
+                        <div class="col-12">
+                            <input type="button" class="btn btn-success" value="Lưu"  style="width: 550px;" onclick="ketqua()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

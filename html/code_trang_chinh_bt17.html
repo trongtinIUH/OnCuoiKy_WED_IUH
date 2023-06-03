@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Shortcut icon" href="https://i.pinimg.com/236x/77/c3/86/77c386dc81c4e9234fbf60a9c6f575c5.jpg">
+    <title>Hoạt Hình</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script src="../js/jquery-3.6.4.js"></script>
+    <script src="../js/bootstrap.js"></script>
+   
+    <script>
+        function kttendn() {
+            let ten = document.getElementById('txttendn').value;
+            let patten = /^\w{3,}$/; //[A-Za-z0-9_]
+            if (patten.test(ten)) {
+                document.getElementById('ertendn').innerHTML = "*";
+                return true;
+            } else {
+                document.getElementById('ertendn').innerHTML = "Ten sai!!!";
+                return false;
+            }
+
+        }
+
+        function ktnhaplaimk() {
+            let mk, mk2;
+            mk = document.getElementById('txtmk').value;
+
+            mk2 = document.getElementById('txtmk2').value;
+            if (mk == mk2) {
+                document.getElementById('ermk2').innerHTML = "*";
+
+                return true;
+            } else {
+                document.getElementById('ermk2').innerHTML = "Mat khau khong trung";
+                return false;
+            }
+
+        }
+        let stt = 1
+        function ketqua() {
+            // lay thong tin tren cac thanh phan form da dung --> chuyen sang trang dangkythanhcong.html
+
+            if (kttendn() && ktnhaplaimk()) {
+                // let win = window.open("dangkythanhcong.html");
+
+                let ten = document.getElementById('txttendn').value;
+                let mk = document.getElementById('txtmk').value;
+                let gioitinh= document.getElementById("gt").value;
+
+        let row_moi = "<tr><td>" + stt + "</td><td>" + ten + "</td><td>" + mk + "</td><td>" + gioitinh + "</td></tr>";
+
+                document.getElementById("tbl").innerHTML += row_moi;
+                
+                stt++;
+            }
+        }
+    </script>
+ 
+    
+</head>
+
+<body>
+    <div class="container">
+        <button data-toggle="modal" data-target="#frmdk">Mo Modal</button>
+    
+        <table class="table table-bordered m-3" id="tbl">
+            <tr>
+                <th>stt</th>
+                <th>Tên dang nhập</th>
+                <th>mật khẩu</th>
+                <th>Giới Tính</th>
+               
+            </tr>
+            
+        </table>
+    </div>
+
+        <!-- tạo modal -->
+        <div class="modal" id="frmdk">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="text-center">đăng kí xem phim h</h1>
+                        <button data-dismiss="modal" class="close">&times;</button>
+                        
+                    </div>
+                    <div class="modal-body">
+                        <form action="">
+                            <div class="row form-group">
+                                <label for="" class="col-3 text-right">Tên đăng nhập</label>
+                                <div class="col-9">
+                                    <input type="text" class="form-control" id="txttendn" onblur="kttendn();">
+                                    <span id="ertendn">*</span>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label for="" class="col-3 text-right">Password</label>
+                                <div class="col-9">
+                                    <input type="password" class="form-control" id="txtmk" >
+                                    <span id="ermk">*</span>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label for="" class="col-3 text-right">Password Again</label>
+                                <div class="col-9">
+                                    <input type="password" class="form-control" id="txtmk2"  onblur="ktnhaplaimk();" >
+                                    <span id="ermk2">*</span>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label for="" class="col-3 text-right">Giới Tính</label>
+                                <div class="col-9">
+
+                                    <input type="text" class="form-control" id="gt" >
+                            
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-12 text-center">
+                                    <input type="button" class="btn btn-dark" value="Dang ky" onclick="ketqua()">
+                                    <input type="reset" class="btn btn-dark" value="Huy">
+    
+                                </div>
+                            </div>
+
+                        </div>
+                        </form>
+                    
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-danger">Hủy</button>
+    
+                    </div>
+                    <div class="modal-footer">
+                       <h2> Wed_Phim_Hoạt_Hình BlackCat | Trần Trọng Tín </h2>
+    
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+</body>
+</html>

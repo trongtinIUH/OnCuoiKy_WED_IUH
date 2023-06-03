@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script src="../js/jquery-3.6.4.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script>
+        let stt=1
+        function ketqua(){
+
+           
+            let ma = document.getElementById('txtMa').value;
+            let ht = document.getElementById('txtHt').value;
+            let ngay = document.getElementById('txtNgay').value;
+            let them = "<tr><td>" +stt+ "</td><td>" +ma+"</td><td>"+ht+"</td><td>"+ngay+"</td></tr>"
+            let them1= "<tr><td>"+stt+"</td><td>"+ma+"</td><td>"+ht+"</td><td>"+ngay+"</td></tr>"
+            document.getElementById("tbl").innerHTML+=them1;
+            stt++;
+        }
+ 
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-12">
+            <header>
+                 <img src="../img/banner.png" alt="">
+            </header>        
+        </div>
+        <div class="col-md-12">
+            <button data-toggle='modal' data-target='#frmdk'>mở tour mới</button>
+            <button type="button">dang nhập</button>
+            <h4 class="text-center">DANH SÁCH TOUR - DU LỊCH VIỆT</h4>
+            <table class="table table-bordered m-3" id='tbl'>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã Tour</th>
+                    <th>hành trình</th>
+                    <th>Ngày khởi hành</th>
+                </tr>
+
+        </table>
+            
+        </div>
+
+                <div class="col-md-12">
+            <footer align="center">
+                SVTH: ------------- - MSSV: ------------- Lớp------------------
+            </footer>
+        </div>
+    </div>
+
+    <div class="modal" id="frmdk" >
+        <div class="modal-dialog  modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button data-dismiss='modal' class="close">&times;</button>
+                    <h1 class="text-center"> thong tin tour</h1>
+                </div>
+
+                <div class="modal-body">
+                    <form action="">
+                          
+
+
+                          <div class="row form-group">
+                                 <label for="txtMa" class="col-3 text-right">mã tour</label>
+                             <div class="col-9">
+                                 <input type="text" id="txtMa" class="form-control">
+                            </div>
+                          </div>
+
+                          <div class="row form-group">
+                            <label for="txtHt" class="col-3 text-right">hành trình</label>
+                        <div class="col-9">
+                            <input type="text" id="txtHt" class="form-control">
+                       </div>
+                     </div>
+                          
+                     <div class="row form-group">
+                        <label for="txtNgay class="col-3 text-right">ngày khởi hành</label>
+                    <div class="col-9">
+                        <input type="date" id="txtNgay" class="form-control">
+                   </div>
+                 </div>
+
+                 <div class=" row form-group">
+                    <div class="col-12 text-center">
+                        <input type="button" class="btn btn-dark" value="đăng ký" onclick="ketqua()">
+                        <input type="reset" class="btn btn-dark" value="hủy" >
+                    </div>
+                 </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-danger">thoát</button>
+                </div>
+                <div class="modal-footer">
+                   21054421_ tran trong tin
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

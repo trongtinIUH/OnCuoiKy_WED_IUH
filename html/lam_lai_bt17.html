@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script src="../js/jquery-3.6.4.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script>
+    
+        function kttendn(){
+            let ten=document.getElementById('txttdn').value;
+            let patten = /^\w{3,}$/;
+            if(patten.test(ten)){
+                document.getElementById('errtendn').innerHTML="*";
+                return true;
+            }else{
+                document.getElementById('errtendn').innerHTML="Tên sai yêu cầu";
+                return false;
+            }
+        }
+        function ktnhapmk(){
+            let mk,mk2;
+             mk=document.getElementById('txtmk').value;
+             mk2=document.getElementById('txtmk2').value;
+            if(mk==mk2){
+                document.getElementById('errmk2').innerHTML="*";
+                return true;
+            }else{
+                document.getElementById('errmk2').innerHTML="không trùng mk";
+                return false;
+            }
+        }
+  
+        let stt=1;
+        function ketqua() {
+            // lay thong tin tren cac thanh phan form da dung --> chuyen sang trang dangkythanhcong.html
+
+            if (kttendn() && ktnhapmk()) {
+                // let win = window.open("dangkythanhcong.html");
+
+                let ten = document.getElementById('txttdn').value;
+                let mk = document.getElementById('txtmk').value;
+                let ns = document.getElementById('txtNgay').value; //string
+
+                let row_moi = "<tr><td>" + stt + "</td><td>" + ten + "</td><td>" + mk + "</td><td>" + ns + "</td></tr>";
+
+                document.getElementById('tbl').innerHTML += row_moi;
+                // localStorage.setItem("name", ten);
+                // localStorage.setItem("password", mk);
+                // localStorage.setItem("dateofbirth", ns);
+                stt++;
+            }
+
+
+
+
+
+        }
+
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-10">
+            <header>
+                <img src="../img/hoat_hinh.jpg" alt="" width="800px" height="400px" >
+            </header>
+        </div>
+       <button data-toggle="modal" data-target="#frmdk">Đăng Ký</button>
+        <table class=" table table-bordered m-3" id="tbl">
+            <tr>
+                <th>STT</th>
+                <th>Tên Đăng Nhập</th>
+                <th>Mật Khẩu</th>
+                <th>Năm sinh</th>
+            </tr>
+        </table>
+    </div>
+    <!-- tạo phần nhập -->
+    <div class="modal" id="frmdk">
+        <div class=" modal-dialog modal-lg">
+            <!--modla-diglog định nghĩa cấu trúc của modal,trong khi lớp modal-lg là kích thuốc của cửa sỗ-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="text-center">Đăng Ký Tài Khoản</h1>
+                    <button data-dismiss="modal" class="close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="row form-group">
+                            <label for="" class="col-3 text-right">Tên đăng nhập</label>
+                            <div class="col-9">
+                                <input type="text" class="form-control" id="txttdn" onblur="kttendn();">
+                                <span id="errtendn">*</span>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="" class="col-3 text-right">Mật khẩu</label>
+                            <div class="col-9">
+                                <input type="password" class="form-control" id="txtmk" >
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="" class="col-3 text-right">NHập lại Mật khẩu</label>
+                            <div class="col-9">
+                                <input type="password" class="form-control" id="txtmk2" onblur="ktnhapmk();" >
+                                <span id="errmk2">*</span>
+                            </div>
+                        </div>
+                    </form>
+                    <form action="">
+                        <h3 class="text-center">Thông Tin Cá Nhân</h3>
+                        <div class="row form-group">
+                            <label for="" class="col-3 text-right">Họ tên</label>
+                            <div class="col-9">
+                                <input type="text" class="form-control" >
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="" class="col-3 text-right">Ngày Sinh</label>
+                            <div class="col-9">
+                                <input type="date" class="form-control" id="txtngaysinh" >
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="" class="col-3 text-right">Giới Tính</label>
+                            <div class="col-9">
+                                <input type="radio"  name="txtgioiinh">Nam
+                                <input type="radio" name="txtgioiinh">Nữ
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="" class="col-3 text-right">Địa chỉ</label>
+                            <div class="col-9">
+                                <input type="text" class="form-control"  >
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="" class="col-3 text-right">SDT</label>
+                            <div class="col-9">
+                                <input type="text" class="form-control" >
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="" class="col-3 text-right">Email</label>
+                            <div class="col-9">
+                                <input type="text" class="form-control"  >
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-12 text-center">
+                                <input type="button" class="btn btn-dark" value="đăng ký" onclick="ketqua()">
+                                <input type="reset" class="btn btn-dark" value="hủy">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-danger">Hủy</button>
+                </div>
+                <div class="modal-footer text-center">
+                    <h2 class="">21054421 Trần Trọng Tín <3 Lê Thị Tơ </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
